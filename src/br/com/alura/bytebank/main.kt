@@ -1,5 +1,6 @@
 package br.com.alura.bytebank
 
+import br.com.alura.bytebank.exception.FalhaAutenticacaoException
 import br.com.alura.bytebank.modelo.Endereco
 import br.com.alura.bytebank.teste.testaComportamentosConta
 
