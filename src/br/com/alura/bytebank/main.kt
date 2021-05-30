@@ -1,34 +1,51 @@
 package br.com.alura.bytebank
 
-import br.com.alura.bytebank.exception.FalhaAutenticacaoException
 import br.com.alura.bytebank.modelo.Endereco
-import br.com.alura.bytebank.teste.testaComportamentosConta
 
 fun main() {
-    testaComportamentosConta()
-    println("início main")
-    funcao1()
-    println("fim main")
+    var endereco: Endereco? = null
+
+    // não podemos acessar properties/membros de  null, codigo abaixo a IDE não deixa nem "escrever"
+    // endereco.bairro
+
+
+    // Codigo a seguir força executar, acessar membro/propertie de null,mas vai dar Exception!
+    // endereco!!.bairro
+
+    //Codigos abaixo roda, poide estaos fazendo um call safe,
+    //Colocamos um "?" na referencia, logo se ela tiver valor mostrará, se estiver nulo escreverá null
+    println("1" + endereco?.logradouro)
+    println("2" +endereco?.logradouro?.length)
+
+    //Safe call com Let
+    endereco.let {
+        println("3" +it?.logradouro)
+    }
+
+    //Safe call com Let e Lambda
+    //Só entra no método se não for null
+    endereco?.let { apelido: Endereco ->
+        println("4" +apelido.logradouro.length)
+    }
+
+    //Elvis Operator
+    //Só entra no método se não for null
+    endereco?.let {
+        val tamanhoComplemento: Int = it.complemento?.length ?: 0
+        println("5" +tamanhoComplemento)
+    }
+
+    //Safe Cast
+    //Se o Cast não for possível a referencia recebe null!
+    var palavra: String = "1,7"
+    var numero: Int? = palavra as? Int
+    println("6" +numero)
+
 }
 
-fun funcao1() {
-    println("início funcao1")
-    funcao2()
-    println("fim funcao1")
-}
 
-fun funcao2() {
-    println("início funcao2")
-    for (i in 1..5) {
-        println(i)
-    }
-    try {
-        val endereco = Any()
-        endereco as Endereco
-    } catch (e: ClassCastException) {
-        println("ClassCastException foi pegada")
-        e.printStackTrace()
-    }
-    println("fim funcao2")
-}
+
+
+
+
 
