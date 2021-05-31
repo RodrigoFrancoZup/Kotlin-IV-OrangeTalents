@@ -1,0 +1,45 @@
+Capítulo 02 - Tratando Exceptions
+Nesse capítulo aprendemos:
+
+⦁	Lidando com Exception: para pegar uma excepttion precisamos do try{} catch{} finally{} onde, try fica o trecho de código que pode gerar uma exception, o catch é o que vou fazer caso ocorra a exception específica, vou capturar uma exception específica e fazer alguna coisa e o finally é opcional, ele é um bloco que será executado com ou sem a ocorrencia de exception. Resumindo o try tenta executar o código, caso ocorra uma exception ele manda a execução para o bloco catch;
+
+try {
+    val endereco = Any()
+    endereco as Endereco
+} catch (e: ClassCastException) {
+    println("ClassCastException foi pegada")
+}
+
+
+⦁	A referencia "e" do código anterior, é do tipo ClassCastException e ele tem properties/membros, para vê-las basta digitar "e.", teremos por exemplo: e.printStackTrace()
+
+⦁	Quando ocorre uma exception o comportamento é: "o código pergunta: no trecho que estou sabe tratar essa exception? Se sim trata, caso contrário pergunta para quem chamou ess função (vai voltando na pilha de execução), nessa volta se houver o try{} ele jogará o código para o catch{}"
+
+	Ou seja, a execução do meu código é afetada dependendo do local que eu coloco o try/catch, por exemplo se eu coloco o try/catch dentro de uma função (mais interno) a execuçao ocorrerá normal, pois ela saberá tratar. Agora se eu colocar o try/catch na chamada de um função e nela ocorrer a falha, essa função não será chamada, pois quem sabe tratar a falha encontra-se na chamada e nao intermanete!
+
+⦁	O try pode ser executado como expressão, ex:
+
+val entrada: String = "1.9"
+val valorConvertido: Double? = try {
+    entrada.toDouble()
+}catch (e: NumberFormatException){
+    println("Problema na conversão")
+    null
+}
+
+val valorComTaxa: Double? = if(valorConvertido != null){
+    valorConvertido + 0.10
+}else{
+    null
+}
+
+if(valorComTaxa != null){
+    println("O valor com taxa $valorComTaxa")
+}else{
+    println("Valor ficou nulo")
+}
+
+Obs: o "if" também funcionada assim, usamos ele como expression e podemos usar o When também.
+
+
+

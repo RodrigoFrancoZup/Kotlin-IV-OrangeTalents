@@ -1,0 +1,12 @@
+Capítulo 01 - Conhecendo a pilha de execução
+Nesse capítulo aprendemos:
+
+⦁	A pilha de execução (call stack) é igual ao Java, ou seja, se estou na função A e nela eu chamo a função B, na chamada de A para B eu sou levado imediatamente para B, quando eu terminar a função B eu sou levado de volta para a função A e o restante de código (após a chamada para B) é executado...A regra é essa, quando passo por uma chamada de função eu sou levado imediatamente para a nova função, mas para voltar para quem me chamou (onde eu estava antes da chamada) só ocorre quando acabar todo o trecho de código no método que eu estou (fui levado)!
+
+⦁	A execução do programa vai seguindo a pilha de execução, agora caso ocorra uma exception (falha), a pilha de execução é interrompida e o programa é finalizado!
+
+⦁	Pergunta: Aprendemos na teoria e na prática com o depurador o que é e como funciona a pilha de execução, ou call stack. Sendo assim, marque as alternativas corretas:
+
+Resposta: A pilha de execução indica a ordem em que as funções serão executadas. (Exatamente! A partir dela podemos verificar quais funções foram chamadas e quais serão executadas.) & 
+O programa é finalizado após a pilha de execução esvaziar.(Exato! A pilha de execução indica se o programa precisa executar alguma coisa, portanto, quando vazia indica que não existe mais nada a ser executado.) &
+Podemos inspecionar a execução do nosso programa por meio do depurador. (Isso mesmo! A partir do depurador ou debugging temos a capacidade de analisar linha a linha do nosso código, conferindo a linha chamada, saída e a pilha de execução.)

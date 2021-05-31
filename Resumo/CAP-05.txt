@@ -1,0 +1,57 @@
+Capítulo 05 - Lidando com referências nulas
+Nesse capítulo aprendemos:
+
+
+⦁	Há variáveis que podemos permitir o nulo "null"
+
+⦁	Para indicar que queremos aceitar null em nossa variável (possível nulo), devemos acrescentar o "?" após o tipo, por exemplo:
+
+	var endereco: Endereco? = null
+
+⦁	Quando uma váriavel é null, não podemos acessar suas properties e membros, pois a referência está apontando para o nulo, mas se quisermos insistir (forçar) é possível com "!!", poderíamos fazer:
+
+	var endereco: Endereco? = null
+	endereco!!.logradouro
+
+o "!!" deixa escrever o código, mas a execução nesse caso vai estourar uma exception, a NPE (Null Pointer Exception);
+
+⦁	Safe Calls: quando declaramos uma variável como possível nulo, devemos acessá-la como "?", pois assim se a referencia estiver nula não dará erro e sim apresentará o resultado null. Exemplo:
+
+	println(endereco?.logradouro)
+	println(endereco?.logradouro?.length)
+
+⦁	Usando Safe Call com let. Let é uma função de escopo, existe várias no Kotlin, ela pega o objeto que está chamando e envolve dentro de uma função. Exemplo de uso, para fazer Safe Calls:
+
+//Safe call com Let
+endereco.let {
+    println(it?.logradouro)
+}
+
+//Safe call com Let e Lambda
+endereco?.let { apelido: Endereco ->
+    println(apelido.logradouro.length)
+}
+
+⦁	Elvis Operator "?:": é uma altenativa do if expression para verfificar se algo é nulo. Para nosso exemplo a propertie complemento de Endereco passou a ser nullable e com valor padrão null. Vamos agora pegar o tamanho da string de complemento (lenght) com o Elvis Operator, e o resultado é o seguinte, se complemento tiver um valor o retorno será o seu tamanho (quantidade de carcteres, caso contrário será 0). O código fica assim:
+
+//Elvis Operator
+endereco?.let {
+    val tamanhoComplemento: Int = it.complemento?.length ?: 0
+    println(tamanhoComplemento)
+}
+
+No lugar do 0 poderíamos lançar uma Exception, por exemplo!
+
+⦁	Onde tem let{} só entramos no bloco se o valor não for null, caso contrário é ignorado (também não lança exception);
+
+⦁	Safe Cast: lembra que quando tentamos fazer um cast de objeto e o mesmo falha e é lançado uma exception? Podemos fazer um Safe Cast, caso não seja possível o Cast a referencia receberá null e não haverá exception. Exemplo:
+
+//Safe Cast
+var palavra: String = "1,7"
+var numero: Int? = palavra as? Int
+println(numero)
+
+⦁	Pergunta:Vimos que o Kotlin oferece bastante suporte para evitar o problema de referências nulas, também conhecido como Null Safety. Considerando o que foi apresentado, marque as alternativas corretas:
+Respostas:
+Para inicializar uma variável com null, ela precisa ser nullable. &
+Se é identificada a possibilidade de referência nula o compilador do Kotlin não compila.

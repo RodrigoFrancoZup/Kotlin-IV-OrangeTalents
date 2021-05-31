@@ -1,0 +1,22 @@
+Capítulo 04 - Capturando qualquer exception
+Nesse capítulo aprendemos:
+
+⦁	Vamos alterar a assinatura da exception SaldoInsuficienteException para ela poder ser personalizavél com uma mensagem, ficando assim:
+
+	class SaldoInsuficienteException(mensagem: String = "O saldo é insuficiente") : Exception(mensagem) { }
+
+	Dessa forma quem lançar essa exception poderá passar uma mensagem, e essa mensagem será repassada para a classe Excpetion(), caso não passem mensagem, o valor padrão será: "O saldo é insuficiente" 
+
+	No momento de lançar a exception:
+
+	throw  SaldoInsuficienteException(mensagem = "O saldo é insuficiente. O saldo atual: $saldo. E você quer enviar: $valor")
+
+⦁	As vezes vamos lidar com excpetions que não conhecemos. Como vamos tratar algo desconhecido? Basta o nosso catch capturar o Exception, ficando assim:
+
+catch (e: Exception) {
+    println("Erro desconhecido!")
+    e.printStackTrace()
+}
+
+Lembre-se: se tivermos tratando com vários catch's, o genérico (apresentado anteriormente) deve ser colocado na última posição! Pois até as Exceptions conhecidas são do tipo Exception, se deixamors ela na primeira opção vamos tratar algo conhecido como desconhecido!
+

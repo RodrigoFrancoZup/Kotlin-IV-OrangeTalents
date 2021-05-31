@@ -1,0 +1,25 @@
+Capítulo 03 - Adicionando Exceptions no código
+Nesse capítulo aprendemos:
+
+⦁	Podemos lançar uma exception com o código: throw nomeDaException(), por exemplo throw ClassCastException();
+
+⦁	Como criar uma Exception personalizada?
+1) Primeiro precisamos criar uma classe, por exemplo: SaldoInsuficienteException;
+2) A classe tem que herdar alguma classe para ela ser uma exceção, vamos tentar primeiro a classe Throwable. Agora já podemos lançar nossa excpetion. Só que Throwable não é a classe recomenda para herdarmos, Throwable tem duas classes filhas, a error e a exception. Devemos herdar a exception. A erro ta relacionado com a JVM, por exemplo a falta de memória, etc.;
+3) Podemos personalizar mais a nossa exception, a mensagem de exceção pode ser passada pelo construtor, ficando assim: 
+
+	class SaldoInsuficneteException : Exception("O saldo é insuficiente")
+
+4)Agora na classe conta, no método transfere podemos lançar essa exception, podemos fazer:
+
+fun transfere(valor: Double, destino: Conta) {
+    if (saldo < valor) {
+        throw  SaldoInsuficienteException()
+    }
+        saldo -= valor
+        destino.deposita(valor)
+}
+
+⦁	Pergunta: Vimos que todas as exceções herdam de Throwable, porém, ao criarmos a nossa exceção percebemos que precisamos tomar tomar alguns cuidados. Quais são eles?
+
+Resposta: Não devemos capturar Errors lançados pelo programa. & Ao criarmos uma exception não podemos herdar diretamente de Throwable.
